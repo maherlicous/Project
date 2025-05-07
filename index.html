@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accessible To-Do List</title>
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+  <header>
+    <h1>Accessible To-Do List</h1>
+    <button id="toggle-contrast">Toggle High Contrast (Alt+C)</button>
+    <button id="toggle-dark">Toggle Dark Mode (Alt+D)</button>
+    <button id="toggle-color-blind">Toggle Color-Blind Mode (Alt+B)</button>
+    <label for="text-scale">Text Size:</label>
+    <input type="range" id="text-scale" min="1" max="3" step="0.1" value="1" aria-label="Adjust text size">
+  </header>
+
+  <main>
+    <h1>Tasks</h1>
+    
+    <div class="filter-controls">
+      <select id="filter-status" aria-label="Filter by status">
+        <option value="all">All Tasks</option>
+        <option value="completed">Completed</option>
+        <option value="pending">Pending</option>
+      </select>
+      
+      <select id="filter-priority" aria-label="Filter by priority">
+        <option value="all">All Priorities</option>
+        <option value="high">High Priority</option>
+        <option value="medium">Medium Priority</option>
+        <option value="low">Low Priority</option>
+      </select>
+      
+      <button id="sort-date">Sort by Date</button>
+      <button id="sort-priority">Sort by Priority</button>
+    </div>
+    
+    <form class="task-form" id="task-form" aria-label="Add a new task">
+      <label for="task-title">Task Title</label>
+      <input type="text" id="task-title" required aria-required="true">
+
+      <label for="task-desc">Task Description</label>
+      <textarea id="task-desc"></textarea>
+
+      <label for="task-date">Due Date</label>
+      <input type="date" id="task-date" aria-label="Select due date">
+      
+      <label for="task-priority">Priority</label>
+      <select id="task-priority" aria-label="Select task priority">
+        <option value="high">High</option>
+        <option value="medium" selected>Medium</option>
+        <option value="low">Low</option>
+      </select>
+
+      <button type="submit">Add Task (Alt+Enter)</button>
+    </form>
+
+    <ul class="task-list" id="task-list" aria-live="polite"></ul>
+
+    <div class="notifications" id="notifications" role="alert" aria-live="polite"></div>
+  </main>
+
+  <div class="modal" id="edit-modal" role="dialog" aria-modal="true" aria-labelledby="edit-modal-title">
+    <div class="modal-content">
+      <h2 id="edit-modal-title">Edit Task</h2>
+      <form id="edit-form">
+        <label for="edit-title">Task Title</label>
+        <input type="text" id="edit-title" required aria-required="true">
+
+        <label for="edit-desc">Task Description</label>
+        <textarea id="edit-desc"></textarea>
+
+        <label for="edit-date">Due Date</label>
+        <input type="date" id="edit-date" aria-label="Select due date">
+        
+        <label for="edit-priority">Priority</label>
+        <select id="edit-priority" aria-label="Select task priority">
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low</option>
+        </select>
+
+        <div class="modal-actions">
+          <button type="button" id="cancel-edit">Cancel (Esc)</button>
+          <button type="submit">Save Changes (Enter)</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="scripts/tasks.js"></script>
+  <script src="scripts/app.js"></script>
+</body>
+</html>
